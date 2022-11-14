@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Task } from "../protocols/task.protocol.js";
-import { getAllTasks, getTaskByPerson, insertTask } from "../repositories/tasks.repositories.js";
+import { checkTask, getAllTasks, getTaskByPerson, insertTask } from "../repositories/tasks.repositories.js";
 
 
 async function createTask(req: Request, res: Response) {
@@ -32,4 +32,15 @@ async function getTasks(req: Request, res: Response) {
     }
 }
 
-export { createTask, getTasks };
+async function editTask(req: Request, res: Response) {
+    const id = req.params.id;
+
+    try {
+        await checkTask(Number(id))
+         return res.sendStatus(200);
+    } catch (error) {
+        return res.sendStatus(500);
+    }
+   
+}
+export { createTask, getTasks, editTask };

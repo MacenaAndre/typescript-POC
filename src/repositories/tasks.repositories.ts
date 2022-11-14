@@ -4,22 +4,29 @@ import { Task, Tasks } from "../protocols/task.protocol.js";
 
 function insertTask(task: Task): Promise<QueryResult> {
     return connection.query(
-        `INSERT INTO tasks (person, task, "doDate", "isDone") VALUES ($1, $2, $3, $4)`,
+        `INSERT INTO tasks (person, task, "doDate", "isDone") VALUES ($1, $2, $3, $4);`,
         [task.person, task.task, task.doDate, task.isDone]
     )
 }
 
 function getTaskByPerson(person: string): Promise<QueryResult<Tasks>> {
     return connection.query(
-        `SELECT * FROM tasks WHERE person = $1`,
+        `SELECT * FROM tasks WHERE person = $1;`,
         [person]
     )
 }
 
 function getAllTasks(): Promise<QueryResult<Tasks>> {
     return connection.query(
-        `SELECT * FROM tasks`
+        `SELECT * FROM tasks;`
     )
 }
 
-export { insertTask, getTaskByPerson, getAllTasks };
+function checkTask(id: number): Promise<QueryResult<Tasks>> {
+    return connection.query(
+        `UPDATE tasks SET "isDone" = true WHERE id = $1;`,
+        [id]
+    )
+}
+
+export { insertTask, getTaskByPerson, getAllTasks, checkTask };
