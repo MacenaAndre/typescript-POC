@@ -1,7 +1,10 @@
 import express from "express";
+import { createTask, getTasks } from "../controllers/tasks.controllers.js";
+import { validateTask } from "../middlewares/tasks.middleware.js";
 
 const taskRouter = express.Router();
 
-taskRouter.post("/task")
+taskRouter.post("/task", validateTask, createTask)
+taskRouter.get("/tasks", getTasks)
 
 export { taskRouter };
