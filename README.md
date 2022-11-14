@@ -16,3 +16,7 @@ Will find a task by the database id and check as Done
 
 DELETE: /task/:id
 Will delete a task by the database id
+
+Scripts for command line:
+'npm run dev' to start the application
+'npm run compile' to compile de .ts files into .js files
