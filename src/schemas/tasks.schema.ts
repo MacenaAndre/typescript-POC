@@ -1,6 +1,6 @@
-import Joi, { ObjectSchema } from "joi";
+import Joi from "joi";
 
-const taskSchema: ObjectSchema = Joi.object({
+const taskSchema = Joi.object({
     person: Joi.string().required(),
     task: Joi.string().required(),
     doDate: Joi.date().required(),
