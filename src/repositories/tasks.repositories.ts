@@ -29,4 +29,11 @@ function checkTask(id: number): Promise<QueryResult<Tasks>> {
     )
 }
 
-export { insertTask, getTaskByPerson, getAllTasks, checkTask };
+function eraseTask(id: Number): Promise<QueryResult<Tasks>> {
+    return connection.query(
+        `DELETE FROM tasks WHERE id = $1;`,
+        [id]
+    )
+}
+
+export { insertTask, getTaskByPerson, getAllTasks, checkTask, eraseTask };
